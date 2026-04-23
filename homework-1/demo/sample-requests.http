@@ -1,0 +1,194 @@
+### Banking Transactions API — Sample Requests
+### VS Code REST Client format (install "REST Client" extension by Huachao Mao)
+### Base URL
+
+@baseUrl = http://localhost:8000
+
+###############################################################################
+# 1. POST /transactions — Create a transfer
+###############################################################################
+
+### Create a transfer between two accounts
+POST {{baseUrl}}/transactions
+Content-Type: application/json
+
+{
+  "fromAccount": "ACC-12345",
+  "toAccount": "ACC-67890",
+  "amount": 100.50,
+  "currency": "USD",
+  "type": "transfer"
+}
+
+###############################################################################
+# 2. POST /transactions — Create a deposit
+###############################################################################
+
+### Deposit into ACC-12345
+POST {{baseUrl}}/transactions
+Content-Type: application/json
+
+{
+  "fromAccount": "ACC-00000",
+  "toAccount": "ACC-12345",
+  "amount": 500.00,
+  "currency": "USD",
+  "type": "deposit"
+}
+
+###############################################################################
+# 3. POST /transactions — Create a withdrawal
+###############################################################################
+
+### Withdraw from ACC-67890
+POST {{baseUrl}}/transactions
+Content-Type: application/json
+
+{
+  "fromAccount": "ACC-67890",
+  "toAccount": "ACC-00000",
+  "amount": 75.25,
+  "currency": "EUR",
+  "type": "withdrawal"
+}
+
+###############################################################################
+# 4. POST /transactions — Validation error: negative amount
+###############################################################################
+
+### Should return 400 — amount must be positive
+POST {{baseUrl}}/transactions
+Content-Type: application/json
+
+{
+  "fromAccount": "ACC-12345",
+  "toAccount": "ACC-67890",
+  "amount": -50.00,
+  "currency": "USD",
+  "type": "transfer"
+}
+
+###############################################################################
+# 5. POST /transactions — Validation error: bad account format
+###############################################################################
+
+### Should return 400 — account must match ACC-XXXXX
+POST {{baseUrl}}/transactions
+Content-Type: application/json
+
+{
+  "fromAccount": "INVALID",
+  "toAccount": "ACC-67890",
+  "amount": 20.00,
+  "currency": "USD",
+  "type": "transfer"
+}
+
+###############################################################################
+# 6. POST /transactions — Validation error: unsupported currency
+###############################################################################
+
+### Should return 400 — XYZ is not a valid ISO 4217 code
+POST {{baseUrl}}/transactions
+Content-Type: application/json
+
+{
+  "fromAccount": "ACC-12345",
+  "toAccount": "ACC-67890",
+  "amount": 10.00,
+  "currency": "XYZ",
+  "type": "transfer"
+}
+
+###############################################################################
+# 7. POST /transactions — Validation error: too many decimal places
+###############################################################################
+
+### Should return 400 — max 2 decimal places allowed
+POST {{baseUrl}}/transactions
+Content-Type: application/json
+
+{
+  "fromAccount": "ACC-12345",
+  "toAccount": "ACC-67890",
+  "amount": 10.999,
+  "currency": "USD",
+  "type": "transfer"
+}
+
+###############################################################################
+# 8. GET /transactions — List all transactions
+###############################################################################
+
+### Retrieve every transaction in memory
+GET {{baseUrl}}/transactions
+
+###############################################################################
+# 9. GET /transactions — Filter by accountId
+###############################################################################
+
+### All transactions where fromAccount or toAccount is ACC-12345
+GET {{baseUrl}}/transactions?accountId=ACC-12345
+
+###############################################################################
+# 10. GET /transactions — Filter by type
+###############################################################################
+
+### Only transfer transactions
+GET {{baseUrl}}/transactions?type=transfer
+
+###############################################################################
+# 11. GET /transactions — Filter by date range
+###############################################################################
+
+### Transactions created between 2024-01-01 and 2024-12-31
+GET {{baseUrl}}/transactions?from=2024-01-01&to=2024-12-31
+
+###############################################################################
+# 12. GET /transactions — Combined filters
+###############################################################################
+
+### Transfers for ACC-12345 within a date range
+GET {{baseUrl}}/transactions?accountId=ACC-12345&type=transfer&from=2024-01-01&to=2025-12-31
+
+###############################################################################
+# 13. GET /transactions/:id — Get a specific transaction
+###############################################################################
+
+### Replace <transaction-id> with a real UUID returned from POST above
+GET {{baseUrl}}/transactions/<transaction-id>
+
+###############################################################################
+# 14. GET /transactions/:id — Not found
+###############################################################################
+
+### Should return 404
+GET {{baseUrl}}/transactions/00000000-0000-0000-0000-000000000000
+
+###############################################################################
+# 15. GET /accounts/:accountId/balance — Get account balance
+###############################################################################
+
+### Balance for ACC-12345
+GET {{baseUrl}}/accounts/ACC-12345/balance
+
+###############################################################################
+# 16. GET /accounts/:accountId/balance — Account with no transactions
+###############################################################################
+
+### Should return balance of 0.0 (or 404 depending on implementation)
+GET {{baseUrl}}/accounts/ACC-99999/balance
+
+###############################################################################
+# 17. GET /accounts/:accountId/summary — Transaction summary (extra feature)
+###############################################################################
+
+### Summary for ACC-12345: deposits, withdrawals, count, most recent date
+GET {{baseUrl}}/accounts/ACC-12345/summary
+
+###############################################################################
+# 18. GET /accounts/:accountId/summary — Account not found
+###############################################################################
+
+### Should return 404
+GET {{baseUrl}}/accounts/ACC-00001/summary
