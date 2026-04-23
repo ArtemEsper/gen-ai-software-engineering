@@ -1,0 +1,3 @@
+# Local vault — blobs stored here when MemPalace cloud is unavailable.
+# Local-only, not tracked in git. Re-run mine/backfill on a new machine.
+vault/
