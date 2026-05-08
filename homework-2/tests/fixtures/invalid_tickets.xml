@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tickets>
+  <ticket>
+    <customer_id>CUST-9020</customer_id>
+    <customer_email>not-an-email</customer_email>
+    <customer_name>Valid Name</customer_name>
+    <subject>Valid subject here</subject>
+    <description>This description is long enough to pass validation checks.</description>
+    <category>account_access</category>
+    <priority>medium</priority>
+    <status>new</status>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-9021</customer_id>
+    <customer_email>valid@example.com</customer_email>
+    <customer_name>Valid Name</customer_name>
+    <subject>Valid subject here</subject>
+    <description>Short</description>
+    <category>billing_question</category>
+    <priority>high</priority>
+    <status>new</status>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-9022</customer_id>
+    <customer_email>valid2@example.com</customer_email>
+    <customer_name>Valid Name</customer_name>
+    <subject>Valid subject here</subject>
+    <description>This description is long enough to pass validation checks.</description>
+    <category>invalid_category</category>
+    <priority>medium</priority>
+    <status>new</status>
+  </ticket>
+</tickets>

@@ -1,0 +1,6 @@
+customer_id,customer_email,customer_name,subject,description,category,priority,status
+CUST-9001,not-an-email,Valid Name,Valid subject here,This description is long enough to pass validation.,account_access,medium,new
+CUST-9002,valid@example.com,,Valid subject here,This description is long enough to pass validation.,billing_question,high,new
+CUST-9003,valid2@example.com,Valid Name,Valid subject here,Short,technical_issue,medium,new
+CUST-9004,valid3@example.com,Valid Name,Valid subject here,This description is long enough to pass validation.,not_a_category,medium,new
+CUST-9005,valid4@example.com,Valid Name,Valid subject here,This description is long enough to pass validation.,feature_request,not_a_priority,new
