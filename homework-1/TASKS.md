@@ -29,12 +29,12 @@ By completing this homework, you will:
 
 Create a REST API with the following endpoints:
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/transactions` | Create a new transaction |
-| `GET` | `/transactions` | List all transactions |
-| `GET` | `/transactions/:id` | Get a specific transaction by ID |
-| `GET` | `/accounts/:accountId/balance` | Get account balance |
+| Method  | Endpoint                       | Description                      |
+|---------|--------------------------------|----------------------------------|
+| `POST`  | `/transactions`                | Create a new transaction         |
+| `GET`   | `/transactions`                | List all transactions            |
+| `GET`   | `/transactions/:id`            | Get a specific transaction by ID |
+| `GET`   | `/accounts/:accountId/balance` | Get account balance              |
 
 **Transaction Model:**
 ```json

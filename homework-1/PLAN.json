@@ -1,0 +1,27 @@
+{
+  "stack": "Python + FastAPI",
+  "extra_feature": "summary",
+  "rationale": "FastAPI provides automatic OpenAPI docs, built-in Pydantic validation, and minimal boilerplate \u2014 ideal for a homework submission. In-memory storage via a plain Python dict keeps the implementation simple. The summary endpoint (Option A) is the most straightforward extra feature and pairs naturally with the balance endpoint already required.",
+  "files": [
+    "README.md",
+    "HOWTORUN.md",
+    ".gitignore",
+    "requirements.txt",
+    "src/main.py",
+    "demo/run.sh",
+    "demo/sample-requests.http",
+    "demo/sample-data.json"
+  ],
+  "notes": [
+    "All data is stored in a module-level dict `transactions: dict[str, Transaction]` \u2014 no database, no persistence.",
+    "Pydantic models handle validation; custom validators enforce ACC-XXXXX format, positive amounts with max 2 decimal places, and ISO 4217 currency codes.",
+    "POST /transactions auto-generates a UUID id, sets timestamp to UTC now, and sets status to 'completed'.",
+    "GET /transactions supports query params: accountId (matches fromAccount OR toAccount), type, from (date), to (date).",
+    "GET /accounts/{accountId}/balance computes balance as sum of deposits/incoming transfers minus withdrawals/outgoing transfers for that account.",
+    "GET /accounts/{accountId}/summary returns total_deposits, total_withdrawals, transaction_count, and most_recent_transaction.",
+    "HTTP status codes: 201 for created transaction, 200 for successful GETs, 400 for validation errors, 404 for not-found.",
+    "requirements.txt pins fastapi and uvicorn[standard] only \u2014 no extra dependencies.",
+    "demo/run.sh starts uvicorn on port 8000; demo/sample-requests.http uses VS Code REST Client syntax covering all endpoints.",
+    "demo/sample-data.json contains a few representative transaction objects matching the Transaction model for reference."
+  ]
+}
