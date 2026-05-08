@@ -1,0 +1,57 @@
+# Ouroboros mechanical checks for homework-2
+# Generated manually (detect failed due to claude max_turns=1 constraint)
+# Run: ouroboros run mechanical
+
+[project]
+name = "homework-2-customer-support-api"
+language = "python"
+runtime = "python3"
+
+[[checks]]
+name = "pytest_all"
+description = "Run full test suite"
+command = "source venv/bin/activate && python -m pytest tests/ -v --tb=short"
+success_exit_codes = [0]
+timeout_seconds = 60
+
+[[checks]]
+name = "coverage_85"
+description = "Verify test coverage is above 85%"
+command = "source venv/bin/activate && python -m pytest tests/ --cov=src --cov-fail-under=85 -q"
+success_exit_codes = [0]
+timeout_seconds = 60
+
+[[checks]]
+name = "src_imports"
+description = "Verify all src modules import cleanly"
+command = "source venv/bin/activate && python -c 'from src.models import Ticket; from src.storage import store; from src.parsers import parse_csv; from src.classifier import classify_ticket; from src.main import app; print(\"all imports OK\")'"
+success_exit_codes = [0]
+timeout_seconds = 15
+
+[[checks]]
+name = "required_files"
+description = "Verify all required deliverable files exist"
+command = "ls src/main.py src/models.py src/storage.py src/parsers.py src/classifier.py README.md HOWTORUN.md API_REFERENCE.md ARCHITECTURE.md TESTING_GUIDE.md requirements.txt demo/run.sh demo/sample-requests.sh demo/sample-requests.http tests/fixtures/sample_tickets.csv tests/fixtures/sample_tickets.json tests/fixtures/sample_tickets.xml"
+success_exit_codes = [0]
+timeout_seconds = 5
+
+[[checks]]
+name = "fixture_row_counts"
+description = "Verify sample data file sizes (50 CSV, 20 JSON, 30 XML)"
+command = "python3 -c \"\nimport json, csv\nwith open('tests/fixtures/sample_tickets.csv') as f: rows = list(csv.DictReader(f)); assert len(rows) == 50, f'CSV: {len(rows)} != 50'\nwith open('tests/fixtures/sample_tickets.json') as f: data = json.load(f); assert len(data['tickets']) == 20, f'JSON: {len(data[\\\"tickets\\\"])} != 20'\nimport xml.etree.ElementTree as ET; root = ET.parse('tests/fixtures/sample_tickets.xml').getroot(); assert len(root.findall(\\\"ticket\\\")) == 30, f'XML: {len(root.findall(\\\"ticket\\\"))} != 30'\nprint('fixture counts OK: CSV=50 JSON=20 XML=30')\n\""
+success_exit_codes = [0]
+timeout_seconds = 10
+
+[[checks]]
+name = "mermaid_diagrams"
+description = "Verify at least 3 Mermaid diagrams exist across docs"
+command = "python3 -c \"\nimport subprocess, sys\ncount = int(subprocess.check_output('grep -r \\\"\\\"\\\"mermaid\\\"\\\"\\\" README.md ARCHITECTURE.md TESTING_GUIDE.md | wc -l', shell=True).strip())\nassert count >= 3, f'Only {count} mermaid blocks found, need >= 3'\nprint(f'mermaid diagrams OK: {count} found')\n\""
+success_exit_codes = [0]
+timeout_seconds = 5
+
+[[checks]]
+name = "api_endpoints_present"
+description = "Verify all 7 required endpoints are defined in main.py"
+command = "python3 -c \"\nwith open('src/main.py') as f: code = f.read()\nroutes = ['/tickets', '/tickets/import', '/tickets/{ticket_id}', '/tickets/{ticket_id}/auto-classify']\nfor r in routes:\n    assert r in code, f'Missing route: {r}'\nprint('all required routes found in main.py')\n\""
+success_exit_codes = [0]
+timeout_seconds = 5

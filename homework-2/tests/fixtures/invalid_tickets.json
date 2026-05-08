@@ -1,0 +1,9 @@
+{
+  "tickets": [
+    {"customer_id": "CUST-9010", "customer_email": "not-an-email", "customer_name": "Valid Name", "subject": "Valid subject", "description": "This description is long enough to be valid.", "category": "account_access", "priority": "medium", "status": "new"},
+    {"customer_id": "CUST-9011", "customer_email": "valid@example.com", "customer_name": "Valid Name", "subject": "Valid subject", "description": "Short", "category": "billing_question", "priority": "high", "status": "new"},
+    {"customer_email": "missing@example.com", "customer_name": "No ID", "subject": "Valid subject", "description": "This description is long enough to be valid.", "priority": "medium", "status": "new"},
+    {"customer_id": "CUST-9013", "customer_email": "valid2@example.com", "customer_name": "Valid Name", "subject": "Valid subject", "description": "This description is long enough to be valid.", "category": "invalid_category", "priority": "medium", "status": "new"},
+    "this is not an object"
+  ]
+}

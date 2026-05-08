@@ -1,0 +1,124 @@
+### Health check
+GET http://localhost:8000/health
+
+###
+
+### Create ticket
+POST http://localhost:8000/tickets
+Content-Type: application/json
+
+{
+  "customer_id": "CUST-001",
+  "customer_email": "alice@example.com",
+  "customer_name": "Alice Smith",
+  "subject": "Cannot login to my account",
+  "description": "I keep getting an authentication error when trying to login. The password reset email is not arriving either.",
+  "category": "account_access",
+  "priority": "high",
+  "status": "new",
+  "tags": ["auth", "login"],
+  "metadata": {"source": "web_form", "device_type": "desktop"}
+}
+
+###
+
+### Create ticket with auto-classification
+POST http://localhost:8000/tickets?auto_classify=true
+Content-Type: application/json
+
+{
+  "customer_id": "CUST-002",
+  "customer_email": "bob@example.com",
+  "customer_name": "Bob Jones",
+  "subject": "Production is down critical outage affecting all users",
+  "description": "All users are unable to access the production system. This is an emergency requiring immediate attention.",
+  "tags": ["outage"]
+}
+
+###
+
+### Create ticket — validation error (bad email)
+POST http://localhost:8000/tickets
+Content-Type: application/json
+
+{
+  "customer_id": "CUST-003",
+  "customer_email": "not-an-email",
+  "customer_name": "Charlie",
+  "subject": "A subject",
+  "description": "Short"
+}
+
+###
+
+### List all tickets
+GET http://localhost:8000/tickets
+
+###
+
+### Filter by category
+GET http://localhost:8000/tickets?category=billing_question
+
+###
+
+### Filter by priority
+GET http://localhost:8000/tickets?priority=urgent
+
+###
+
+### Filter by status
+GET http://localhost:8000/tickets?status=new
+
+###
+
+### Filter by multiple params
+GET http://localhost:8000/tickets?category=billing_question&priority=high
+
+###
+
+### Filter by customer_id
+GET http://localhost:8000/tickets?customer_id=CUST-001
+
+###
+
+### Get specific ticket (replace ID)
+GET http://localhost:8000/tickets/{{ticket_id}}
+
+###
+
+### Update ticket status
+PUT http://localhost:8000/tickets/{{ticket_id}}
+Content-Type: application/json
+
+{
+  "status": "in_progress",
+  "assigned_to": "agent1@support.com"
+}
+
+###
+
+### Auto-classify existing ticket
+POST http://localhost:8000/tickets/{{ticket_id}}/auto-classify
+
+###
+
+### Delete ticket
+DELETE http://localhost:8000/tickets/{{ticket_id}}
+
+###
+
+### Bulk import CSV (adjust file path as needed)
+POST http://localhost:8000/tickets/import
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="sample_tickets.csv"
+Content-Type: text/csv
+
+< tests/fixtures/sample_tickets.csv
+--boundary--
+
+###
+
+### Get 404 for nonexistent ticket
+GET http://localhost:8000/tickets/00000000-0000-0000-0000-000000000000

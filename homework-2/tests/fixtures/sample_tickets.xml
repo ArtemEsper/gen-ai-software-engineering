@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tickets>
+  <ticket>
+    <customer_id>CUST-3000</customer_id>
+    <customer_email>xml_user0@example.com</customer_email>
+    <customer_name>XML User 0</customer_name>
+    <subject>Cannot access account after password change</subject>
+    <description>I changed my password yesterday and now I cannot login. The system says my credentials are invalid even though I just reset them.</description>
+    <category>account_access</category>
+    <priority>urgent</priority>
+    <status>new</status>
+    <tags><tag>login</tag><tag>password</tag></tags>
+    <metadata><source>web_form</source><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-3001</customer_id>
+    <customer_email>xml_user1@example.com</customer_email>
+    <customer_name>XML User 1</customer_name>
+    <subject>Critical bug in payment processing</subject>
+    <description>Payments are failing for all users. This is production down and affecting our revenue. We need an emergency fix immediately.</description>
+    <category>technical_issue</category>
+    <priority>urgent</priority>
+    <status>new</status>
+    <tags><tag>payment</tag><tag>critical</tag></tags>
+    <metadata><source>phone</source><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-3002</customer_id>
+    <customer_email>xml_user2@example.com</customer_email>
+    <customer_name>XML User 2</customer_name>
+    <subject>Invoice shows wrong amount</subject>
+    <description>My latest invoice shows an incorrect amount. I was billed $200 but should have been billed $100 per our subscription agreement.</description>
+    <category>billing_question</category>
+    <priority>high</priority>
+    <status>new</status>
+    <tags><tag>invoice</tag></tags>
+    <metadata><source>email</source><device_type>mobile</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-3003</customer_id>
+    <customer_email>xml_user3@example.com</customer_email>
+    <customer_name>XML User 3</customer_name>
+    <subject>Feature request: multi-language support</subject>
+    <description>We would love to have multi-language support for our international users. This enhancement would help us expand to new markets.</description>
+    <category>feature_request</category>
+    <priority>medium</priority>
+    <status>new</status>
+    <tags><tag>i18n</tag></tags>
+    <metadata><source>api</source><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-3004</customer_id>
+    <customer_email>xml_user4@example.com</customer_email>
+    <customer_name>XML User 4</customer_name>
+    <subject>Data export shows incorrect results</subject>
+    <description>Steps to reproduce: 1) Go to reports 2) Export to CSV 3) Open file. Expected: current data. Actual: data from 3 months ago. This is a regression.</description>
+    <category>bug_report</category>
+    <priority>high</priority>
+    <status>in_progress</status>
+    <tags><tag>export</tag><tag>regression</tag></tags>
+    <metadata><source>web_form</source><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-3005</customer_id>
+    <customer_email>xml_user5@example.com</customer_email>
+    <customer_name>XML User 5</customer_name>
+    <subject>2FA authentication not working</subject>
+    <description>My two-factor authentication stopped working after the last update. I cannot log in without 2FA which means I am completely locked out.</description>
+    <category>account_access</category>
+    <priority>urgent</priority>
+    <status>new</status>
+    <tags><tag>2fa</tag><tag>auth</tag></tags>
+    <metadata><source>chat</source><device_type>mobile</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-3006</customer_id>
+    <customer_email>xml_user6@example.com</customer_email>
+    <customer_name>XML User 6</customer_name>
+    <subject>Slow loading dashboard</subject>
+    <description>The dashboard takes over 30 seconds to load. This performance issue is severely impacting our team's productivity.</description>
+    <category>technical_issue</category>
+    <priority>high</priority>
+    <status>new</status>
+    <tags><tag>performance</tag></tags>
+    <metadata><source>web_form</source><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-3007</customer_id>
+    <customer_email>xml_user7@example.com</customer_email>
+    <customer_name>XML User 7</customer_name>
+    <subject>Suggestion: add keyboard shortcuts</subject>
+    <description>Adding keyboard shortcuts would be a nice enhancement. When you get a chance it would be great to have this improvement in the UI.</description>
+    <category>feature_request</category>
+    <priority>low</priority>
+    <status>new</status>
+    <tags><tag>ux</tag></tags>
+    <metadata><source>email</source><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-3008</customer_id>
+    <customer_email>xml_user8@example.com</customer_email>
+    <customer_name>XML User 8</customer_name>
+    <subject>Unexpected logout every 5 minutes</subject>
+    <description>I keep getting logged out unexpectedly about every 5 minutes. This bug makes the application unusable. It always fails without any warning.</description>
+    <category>technical_issue</category>
+    <priority>high</priority>
+    <status>new</status>
+    <tags><tag>session</tag></tags>
+    <metadata><source>web_form</source><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-3009</customer_id>
+    <customer_email>xml_user9@example.com</customer_email>
+    <customer_name>XML User 9</customer_name>
+    <subject>Request refund for annual subscription</subject>
+    <description>I accidentally purchased an annual subscription instead of monthly. I need to cancel and get a refund for the difference immediately.</description>
+    <category>billing_question</category>
+    <priority>urgent</priority>
+    <status>new</status>
+    <tags><tag>refund</tag><tag>subscription</tag></tags>
+    <metadata><source>phone</source><device_type>mobile</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-3010</customer_id>
+    <customer_email>xml_user10@example.com</customer_email>
+    <customer_name>XML User 10</customer_name>
+    <subject>API returns 502 bad gateway</subject>
+    <description>Our integration is getting 502 bad gateway errors from your API. This is blocking all our automated processes. The error started 2 hours ago.</description>
+    <category>technical_issue</category>
+    <priority>urgent</priority>
+    <status>new</status>
+    <tags><tag>api</tag><tag>502</tag></tags>
+    <metadata><source>api</source><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-3011</customer_id>
+    <customer_email>xml_user11@example.com</customer_email>
+    <customer_name>XML User 11</customer_name>
+    <subject>Add role-based access control</subject>
+    <description>We need role-based access control for our team. This is an important feature for our enterprise security requirements and compliance.</description>
+    <category>feature_request</category>
+    <priority>high</priority>
+    <status>new</status>
+    <tags><tag>rbac</tag><tag>security</tag></tags>
+    <metadata><source>api</source><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-3012</customer_id>
+    <customer_email>xml_user12@example.com</customer_email>
+    <customer_name>XML User 12</customer_name>
+    <subject>Wrong currency displayed in billing</subject>
+    <description>My billing page is showing amounts in USD but I should be billed in EUR. This incorrect behavior has been happening since last month.</description>
+    <category>billing_question</category>
+    <priority>medium</priority>
+    <status>in_progress</status>
+    <tags><tag>currency</tag></tags>
+    <metadata><source>web_form</source><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-3013</customer_id>
+    <customer_email>xml_user13@example.com</customer_email>
+    <customer_name>XML User 13</customer_name>
+    <subject>Defect in search functionality</subject>
+    <description>The search feature does not return results consistently. Sometimes it works and sometimes it returns nothing. Inconsistent behavior observed across multiple browsers.</description>
+    <category>bug_report</category>
+    <priority>medium</priority>
+    <status>new</status>
+    <tags><tag>search</tag></tags>
+    <metadata><source>web_form</source><device_type>tablet</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-3014</customer_id>
+    <customer_email>xml_user14@example.com</customer_email>
+    <customer_name>XML User 14</customer_name>
+    <subject>General question about data retention</subject>
+    <description>I have a general question about your data retention policies. How long is customer data kept and what is the deletion process?</description>
+    <category>other</category>
+    <priority>low</priority>
+    <status>new</status>
+    <tags></tags>
+    <metadata><source>email</source><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-3015</customer_id>
+    <customer_email>xml_user15@example.com</customer_email>
+    <customer_name>XML User 15</customer_name>
+    <subject>Login page down for all users</subject>
+    <description>The login page is completely down. None of our users can access the application. This is a production outage affecting all customers.</description>
+    <category>technical_issue</category>
+    <priority>urgent</priority>
+    <status>new</status>
+    <tags><tag>outage</tag><tag>login</tag></tags>
+    <metadata><source>phone</source><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-3016</customer_id>
+    <customer_email>xml_user16@example.com</customer_email>
+    <customer_name>XML User 16</customer_name>
+    <subject>Integration with Slack requested</subject>
+    <description>We would love to have a Slack integration so our team gets notifications. This would be a great enhancement that many users have requested.</description>
+    <category>feature_request</category>
+    <priority>medium</priority>
+    <status>new</status>
+    <tags><tag>slack</tag><tag>integration</tag></tags>
+    <metadata><source>api</source><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-3017</customer_id>
+    <customer_email>xml_user17@example.com</customer_email>
+    <customer_name>XML User 17</customer_name>
+    <subject>Account suspended without notice</subject>
+    <description>My account was suspended without any prior notice or explanation. I cannot access any of my data. This is blocking my entire workflow.</description>
+    <category>account_access</category>
+    <priority>urgent</priority>
+    <status>new</status>
+    <tags><tag>suspended</tag></tags>
+    <metadata><source>email</source><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-3018</customer_id>
+    <customer_email>xml_user18@example.com</customer_email>
+    <customer_name>XML User 18</customer_name>
+    <subject>Export to PDF is broken</subject>
+    <description>The PDF export feature stopped working after the last deployment. Steps to reproduce: click export, select PDF, click download. The download never starts.</description>
+    <category>bug_report</category>
+    <priority>medium</priority>
+    <status>new</status>
+    <tags><tag>export</tag><tag>pdf</tag></tags>
+    <metadata><source>web_form</source><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-3019</customer_id>
+    <customer_email>xml_user19@example.com</customer_email>
+    <customer_name>XML User 19</customer_name>
+    <subject>Billing portal shows blank page</subject>
+    <description>When I try to access the billing portal I see a completely blank page. I cannot view my invoices or payment history. This has been happening for a week.</description>
+    <category>billing_question</category>
+    <priority>high</priority>
+    <status>waiting_customer</status>
+    <tags><tag>billing</tag><tag>portal</tag></tags>
+    <metadata><source>chat</source><device_type>mobile</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-3020</customer_id>
+    <customer_email>xml_user20@example.com</customer_email>
+    <customer_name>XML User 20</customer_name>
+    <subject>Minor typo in error message</subject>
+    <description>There is a minor typo in the error message shown when login fails. It says 'invaild' instead of 'invalid'. This is purely a cosmetic fix, no rush.</description>
+    <category>bug_report</category>
+    <priority>low</priority>
+    <status>new</status>
+    <tags><tag>cosmetic</tag></tags>
+    <metadata><source>web_form</source><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-3021</customer_id>
+    <customer_email>xml_user21@example.com</customer_email>
+    <customer_name>XML User 21</customer_name>
+    <subject>Forgot password email not delivered</subject>
+    <description>I requested a password reset email multiple times but never received it. I checked spam. I cannot access my account without resetting my password.</description>
+    <category>account_access</category>
+    <priority>high</priority>
+    <status>new</status>
+    <tags><tag>email</tag><tag>password</tag></tags>
+    <metadata><source>web_form</source><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-3022</customer_id>
+    <customer_email>xml_user22@example.com</customer_email>
+    <customer_name>XML User 22</customer_name>
+    <subject>Database connection errors in logs</subject>
+    <description>Our monitoring shows database connection errors in the application logs. This is causing intermittent failures for our users and needs urgent investigation.</description>
+    <category>technical_issue</category>
+    <priority>urgent</priority>
+    <status>in_progress</status>
+    <tags><tag>database</tag><tag>logs</tag></tags>
+    <metadata><source>api</source><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-3023</customer_id>
+    <customer_email>xml_user23@example.com</customer_email>
+    <customer_name>XML User 23</customer_name>
+    <subject>Request for advanced analytics</subject>
+    <description>We would love to have more advanced analytics features. Custom date ranges and filtering would be a great improvement for our reporting needs.</description>
+    <category>feature_request</category>
+    <priority>medium</priority>
+    <status>new</status>
+    <tags><tag>analytics</tag></tags>
+    <metadata><source>email</source><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-3024</customer_id>
+    <customer_email>xml_user24@example.com</customer_email>
+    <customer_name>XML User 24</customer_name>
+    <subject>Incorrect item count on dashboard</subject>
+    <description>The dashboard shows 150 items but I only have 50. Wrong result is shown every time. I have reproduced this on three different browsers.</description>
+    <category>bug_report</category>
+    <priority>high</priority>
+    <status>new</status>
+    <tags><tag>dashboard</tag></tags>
+    <metadata><source>web_form</source><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-3025</customer_id>
+    <customer_email>xml_user25@example.com</customer_email>
+    <customer_name>XML User 25</customer_name>
+    <subject>Subscription plan upgrade billing issue</subject>
+    <description>I upgraded my plan but was charged the old price. The billing did not reflect the new subscription tier. I need this corrected and a proper invoice issued.</description>
+    <category>billing_question</category>
+    <priority>high</priority>
+    <status>new</status>
+    <tags><tag>billing</tag><tag>upgrade</tag></tags>
+    <metadata><source>chat</source><device_type>mobile</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-3026</customer_id>
+    <customer_email>xml_user26@example.com</customer_email>
+    <customer_name>XML User 26</customer_name>
+    <subject>Feedback on onboarding experience</subject>
+    <description>I wanted to share some general feedback about the onboarding experience. The setup wizard was confusing. Some documentation improvements would help new users.</description>
+    <category>other</category>
+    <priority>low</priority>
+    <status>closed</status>
+    <tags><tag>feedback</tag></tags>
+    <metadata><source>web_form</source><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-3027</customer_id>
+    <customer_email>xml_user27@example.com</customer_email>
+    <customer_name>XML User 27</customer_name>
+    <subject>Email notifications not sending</subject>
+    <description>I am not receiving any email notifications even though they are enabled in settings. I have missed several important alerts because of this bug.</description>
+    <category>technical_issue</category>
+    <priority>medium</priority>
+    <status>new</status>
+    <tags><tag>email</tag><tag>notifications</tag></tags>
+    <metadata><source>web_form</source><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-3028</customer_id>
+    <customer_email>xml_user28@example.com</customer_email>
+    <customer_name>XML User 28</customer_name>
+    <subject>Request: mobile app for Android</subject>
+    <description>Many of our users have requested an Android mobile app. Having a native mobile app would be a great enhancement to the platform experience.</description>
+    <category>feature_request</category>
+    <priority>medium</priority>
+    <status>new</status>
+    <tags><tag>mobile</tag><tag>android</tag></tags>
+    <metadata><source>email</source><device_type>mobile</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-3029</customer_id>
+    <customer_email>xml_user29@example.com</customer_email>
+    <customer_name>XML User 29</customer_name>
+    <subject>Account locked after too many login attempts</subject>
+    <description>My account got locked after entering the wrong password a few times. I know the correct password now but cannot unlock the account myself. Please help.</description>
+    <category>account_access</category>
+    <priority>medium</priority>
+    <status>resolved</status>
+    <tags><tag>locked</tag></tags>
+    <metadata><source>web_form</source><device_type>desktop</device_type></metadata>
+  </ticket>
+</tickets>
