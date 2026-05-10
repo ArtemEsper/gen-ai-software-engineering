@@ -1,0 +1,15 @@
+{
+  "title": "hw3_repo: ID scheme and traceability conventions",
+  "content": "## HW3 Traceability ID Scheme\n\n### ID Prefixes\n| Prefix | Type | Owner | Count |\n|---|---|---|---|\n| OBJ-xx | Mid-level objectives | Agent 1 | 7 (OBJ-01–07) |\n| REQ-xx.xx | Functional requirements | Agent 1 | 43 across 7 OBJs |\n| TASK-xx.xx | Low-level tasks | Agent 1 | 34 across 7 groups |\n| EDGE-xx | Edge cases | Agent 1 | 22 (EDGE-01–22) |\n| NFR-xx | Non-functional requirements | Agent 2 | 21 (NFR-01–21) |\n| COMP-xx | Compliance assumptions | Agent 2 | 12 (COMP-01–12) |\n| SEC-xx | Security requirements | Agent 2 | 12 (SEC-01–12) |\n| AUD-xx | Audit event types | Agent 2 | 29 (AUD-01–29) |\n| AUD-RET-xx | Audit retention rules | Agent 2 | 6 (AUD-RET-01–06) |\n| FAIL-xx | Failure modes | Agent 2 | 10 (FAIL-01–10) |\n| FRAUD-xx | Fraud/abuse edge cases | Agent 2 | 9 (FRAUD-01–09) |\n| OQ-xx | Open questions | Agent 1/2 | 8 (OQ-01–08) |\n\n### Linking Rules\n- Every REQ cites exactly one OBJ parent\n- Every TASK cites exactly one REQ parent\n- Every EDGE cites at least one TASK it affects\n- NFR entries cross-referenced in TASK and TEST where they impose constraints\n\n### Subsystems\n| ID | Name |\n|---|---|\n| SYS-01 | Virtual Card Creation |\n| SYS-02 | Card Freeze and Unfreeze |\n| SYS-03 | Spending Controls |\n| SYS-04 | Transaction Visibility |\n| SYS-05 | Audit and Compliance Operations |\n",
+  "tags": [
+    "hw3_repo",
+    "traceability",
+    "id-scheme",
+    "conventions"
+  ],
+  "metadata": {
+    "scope": "hw3_repo",
+    "source": "specification.md/§6,§17",
+    "mined_at": "2026-05-10T17:40:00Z"
+  }
+}

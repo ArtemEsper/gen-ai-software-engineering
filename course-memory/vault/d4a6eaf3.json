@@ -1,0 +1,15 @@
+{
+  "title": "hw3_convos: ouroboros and tooling notes",
+  "content": "## HW3 Tooling Notes\n\n### Ouroboros\n- Previously installed for HW2 from https://github.com/Q00/ouroboros\n- Initiation command: `ooo interview \"description\"` for Socratic questioning\n- `ooo auto` for goal → seed → execution with bounded loops\n- `ooo run seed.yaml` for Double Diamond decomposition\n- `ooo setup` to register runtime & configure project\n- User asked about ouroboros for HW3 but ultimately used the manual 3-agent workflow instead\n\n### AI workflow approach for HW3\n- Did NOT use ouroboros for HW3; used a manual 3-agent Claude conversation workflow instead\n- Agent 1 (Product Architect), Agent 2 (Compliance Reviewer), Agent 3 (QA Evaluator)\n- Each phase was a separate prompt in the same conversation\n- Agent 3 never edits — review-only; Agent 2 has veto on security/privacy\n- This manual approach gave more control over the spec quality than automated tooling\n\n### Key lesson\n- For specification-only homework (no code), the manual multi-agent conversation workflow was more effective than automated tooling because each phase's output could be reviewed and approved before proceeding\n",
+  "tags": [
+    "hw3_convos",
+    "tooling",
+    "ouroboros",
+    "workflow"
+  ],
+  "metadata": {
+    "scope": "hw3_convos",
+    "source": "session/2026-05-10",
+    "mined_at": "2026-05-10T17:40:00Z"
+  }
+}

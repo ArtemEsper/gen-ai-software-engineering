@@ -1,0 +1,16 @@
+{
+  "title": "hw3_convos: multi-agent workflow session 2026-05-10",
+  "content": "## HW3 Session Summary — 2026-05-10\n\n### What was built\nComplete specification-driven design package for Virtual Card Lifecycle and Spending Controls. No code — documentation only.\n\n### 6-Phase multi-agent workflow executed\n1. **Phase 1 — Foundation (Agent 1 Pass 1):** Narrowed scope, defined 7 OBJs with measurable criteria, subsystem map (SYS-01–05), traceability ID convention, beginning/ending context, task group headings\n2. **Phase 2 — Compliance Overlay (Agent 2 Pass 1):** Added 12 COMP assumptions, 12 SEC requirements, 29 AUD events, 21 NFRs, 9 FRAUD edge cases, 10 FAIL modes, data classification matrix\n3. **Phase 3 — Deep Specification (Agent 1 Pass 2):** Integrated compliance overlay into full 19-section specification.md with state machines, API contracts, data models, task decomposition\n4. **Phase 4 — QA Review (Agent 3 Pass 1):** Found 7 CRITICAL gaps (missing deliverables, broken traceability, field count mismatch), 9 MAJOR gaps, 6 MINOR flags\n5. **Phase 5 — Remediation (Agent 1 + Agent 2):** Created agents.md, .cursorrules, README.md; patched all CRITICAL/MAJOR/MINOR issues; added 3 missing API endpoints (Delete Limit, Terminate Card, Deregister Webhook)\n6. **Phase 6 — Final Hardening:** 19 cross-file consistency fixes; zero orphan IDs; version finalized to 1.0-FINAL\n\n### Key design decisions\n- **Domain choice:** Virtual cards chosen for regulatory richness (PCI-DSS, PSD2, GDPR, AMLD) + natural state machine + multi-actor permissions\n- **FROZEN vs SUSPENDED:** Semantic distinction — FROZEN is user/ops reversible; SUSPENDED requires upstream compliance clearance only\n- **Pre-auth limit enforcement:** Spending limits evaluated before network call, within 50ms p99 budget\n- **Audit atomicity:** State change + audit event in same DB transaction; audit failure rolls back state change (FAIL-04)\n- **GDPR vs AMLD:** Pseudonymisation (not deletion) when 7-year retention applies\n- **Idempotency:** Original HTTP status code preserved on replay; body hash mismatch returns HTTP 422\n- **17-field audit schema:** Including hash chaining for tamper evidence and sequence numbers for gap detection\n\n### Agent 3 QA findings (most impactful)\n- Missing deliverables (agents.md, .cursorrules, README.md) — all created in Phase 5\n- TASK count mismatches in traceability (OBJ body claims vs actual tasks) — all corrected\n- Audit field count 16→17 mismatch — corrected across all files\n- Missing API endpoints (DELETE limit, terminate card, deregister webhook) — added as §11.8–11.10\n- SUPPORT role not in RBAC registry — added\n- NFR-11 idempotency HTTP status ambiguity — clarified\n",
+  "tags": [
+    "hw3_convos",
+    "session",
+    "multi-agent",
+    "workflow",
+    "specification"
+  ],
+  "metadata": {
+    "scope": "hw3_convos",
+    "source": "session/2026-05-10",
+    "mined_at": "2026-05-10T17:40:00Z"
+  }
+}
