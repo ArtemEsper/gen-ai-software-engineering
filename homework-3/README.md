@@ -1,6 +1,10 @@
 # Homework 3: Specification-Driven Design
 # Virtual Card Lifecycle and Spending Controls
 
+> **Student Name**: Artem Chumachenko
+> **Date Submitted**: 12.05.2026
+> **AI Tools Used**: [ Claude Code Sonnet 4.6, Opus 4.6, Opus 4.7, Codex 5.1, GitHub Copilot, CC GUI]
+
 ---
 
 ## Student & Task Summary
