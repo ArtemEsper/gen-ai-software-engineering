@@ -1,0 +1,15 @@
+{
+  "title": "hw3_repo: specification package structure",
+  "content": "## HW3 Specification Package — Virtual Card Lifecycle\n\n### Deliverables (homework-3/)\n- `specification.md` — 1,903 lines, 19 sections (v1.0-FINAL)\n- `agents.md` — 3-agent workflow, 247 lines\n- `rules/.cursorrules` — 28 AI/editor rules, 199 lines\n- `README.md` — rationale + 10 best practices, 170 lines\n\n### Supporting artefacts\n- `hw3-planning-architecture.md` — Phase 1 scope evaluation & agent design\n- `hw3-agent1-phase1-foundation.md` — Agent 1 Pass 1 output\n- `hw3-agent2-compliance-overlay.md` — Agent 2 Pass 1 (compliance/risk)\n- `TASKS.md` — original homework brief\n\n### Specification structure (19 sections)\n1. Document Control\n2. Vision and Product Context (incl. Data Classification Matrix)\n3. Stakeholders and Personas (6 roles: CARDHOLDER, PROGRAM_MANAGER, FRAUD_OPS, OPERATIONS_READ, COMPLIANCE_READ, SUPPORT)\n4. Scope and Out-of-Scope (5 in-scope subsystems, 11 excluded)\n5. High-Level Objective (HLO-01)\n6. Mid-Level Objectives (OBJ-01–07 with measurable success criteria)\n7. Regulatory, Security, and Compliance (COMP-01–12, SEC-01–12, AUD-01–29, AUD-RET-01–06)\n8. Non-Functional Requirements (NFR-01–21)\n9. Subsystem Specifications (SYS-01–05 with REQs, permissions, edge cases, verification)\n10. State Machines (4 Mermaid diagrams: card lifecycle, freeze flow, transaction FSM, limit evaluation)\n11. API Contracts (15 endpoints with schemas, error codes, SCA/idempotency requirements)\n12. Data Models (7 models: VirtualCard, SpendingLimit, TransactionRecord, AuditEvent, WebhookRegistration, WebhookDeliveryAttempt, RiskSignal)\n13. Edge Cases and Failure Modes (22 EDGE + 10 FAIL)\n14. Low-Level Task Decomposition (34 tasks in 7 groups)\n15. Beginning/Ending Context\n16. Verification Strategy (6 categories)\n17. Traceability Matrix\n18. Glossary (24 terms)\n19. Open Questions (8, all with assumptions documented)\n",
+  "tags": [
+    "hw3_repo",
+    "structure",
+    "deliverables",
+    "specification"
+  ],
+  "metadata": {
+    "scope": "hw3_repo",
+    "source": "session/2026-05-10",
+    "mined_at": "2026-05-10T17:40:00Z"
+  }
+}

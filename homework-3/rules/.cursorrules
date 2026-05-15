@@ -1,0 +1,199 @@
+# Virtual Card Lifecycle and Spending Controls — AI/Editor Rules
+# Source: SPEC-VCLS-001 Agent 2 Compliance Overlay + Agent 3 QA Pass 1
+# Version: 1.0 — Phase 5 Remediation
+
+# ─────────────────────────────────────────────────────────────
+# DOMAIN CONTEXT
+# ─────────────────────────────────────────────────────────────
+
+# This project is a regulated FinTech system for virtual card lifecycle
+# management. It operates under PCI-DSS v4.0, PSD2, GDPR, and EU AMLD.
+# The primary specification is specification.md. All design decisions,
+# naming conventions, and security rules trace to that document.
+
+# ─────────────────────────────────────────────────────────────
+# DATA SECURITY RULES (enforced on every code generation)
+# ─────────────────────────────────────────────────────────────
+
+# Rule 1: NEVER generate code that logs, prints, or stores a raw PAN
+# (Primary Account Number — a 16-digit card number) or CVV/CVC2.
+# Use the card token reference from the PAN Vault instead.
+# If displaying a card number to the user, use masked format only:
+#   "**** **** **** {last4}"
+# Reference: COMP-01, COMP-02, SEC-03
+
+# Rule 2: NEVER generate SQL queries using string concatenation or
+# f-strings/template literals for user-supplied values.
+# Always use parameterised queries, prepared statements, or ORM
+# query builders.
+# Reference: SEC-11
+
+# Rule 3: NEVER generate code that stores CVV/CVC2 in any variable
+# that persists beyond the scope of the HTTP response handler for
+# card issuance. CVV is ephemeral — one response, then gone.
+# Reference: COMP-02, SEC-04
+
+# Rule 4: When generating API response schemas, NEVER include fields
+# classified as CRITICAL or SENSITIVE (per specification.md §2.4)
+# unless the endpoint is explicitly designed for that data and the
+# caller's role is verified before the data is accessed.
+# Reference: SEC-06, §2.4 Data Classification Matrix
+
+# Rule 5: All HTTP responses containing card credentials MUST include
+# the response header: Cache-Control: no-store
+# Reference: SEC-04
+
+# Rule 6: API responses for resources belonging to a different
+# cardholder MUST return HTTP 403 (not HTTP 404). HTTP 404 is only
+# correct when the resource genuinely does not exist for any caller.
+# Reference: SEC-10
+
+# ─────────────────────────────────────────────────────────────
+# AUDIT RULES (enforced on all state-changing operations)
+# ─────────────────────────────────────────────────────────────
+
+# Rule 7: Every function that changes card state, spending limits,
+# or webhook registrations MUST write an audit event as part of the
+# same database transaction. If the audit write fails, the state
+# change MUST be rolled back. No state change without an audit event.
+# Reference: OBJ-06, FAIL-04, REQ-06.04
+
+# Rule 8: Audit events MUST use the 17-field schema defined in
+# specification.md §7.2. Do not invent new audit event types without
+# assigning an AUD-ID from the registry in §7.3.
+# Reference: AUD-01–29
+
+# Rule 9: When generating audit event payloads, always include
+# both before_state and after_state fields.
+# For creation events: before_state is null.
+# For failed operations: after_state is null.
+# Missing fields must be null — never absent from the payload.
+# Reference: §7.2
+
+# Rule 10: The audit store is append-only. NEVER generate UPDATE or
+# DELETE operations targeting compliance-classified audit event records.
+# Reference: AUD-RET-05, REQ-05.01
+
+# ─────────────────────────────────────────────────────────────
+# API DESIGN RULES
+# ─────────────────────────────────────────────────────────────
+
+# Rule 11: All mutating endpoints (POST, PUT, PATCH, DELETE) MUST
+# accept an Idempotency-Key header and implement idempotent behaviour.
+# Duplicate requests within 24h return the original response with the
+# original HTTP status code. Body hash mismatch returns HTTP 422.
+# Reference: NFR-11
+
+# Rule 12: Error responses MUST use structured JSON with these fields:
+#   { "error_code": "MACHINE_READABLE_ENUM",
+#     "message": "Human-readable description",
+#     "details": {} }
+# Never return raw exception messages, stack traces, or unstructured
+# error strings to the caller.
+# Reference: §11 API Contracts
+
+# Rule 13: When generating RBAC checks, ALWAYS verify the caller's
+# role BEFORE executing business logic. Never check permissions after
+# the operation has already been performed.
+# Reference: SEC-06
+
+# Rule 14: Webhook URLs MUST be validated at registration:
+#   - Scheme must be https://
+#   - Host must not resolve to private IP ranges:
+#     10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 169.254.0.0/16,
+#     127.0.0.0/8, ::1
+# Invalid URLs return HTTP 422 INVALID_WEBHOOK_URL.
+# Reference: SEC-12
+
+# Rule 15: All timestamps stored or returned by this system MUST be
+# in UTC. API field names for timestamps MUST use the _utc suffix
+# (e.g., created_at_utc, auth_timestamp_utc).
+# Reference: REQ-04.04, §18 Glossary
+
+# ─────────────────────────────────────────────────────────────
+# STATE MACHINE RULES
+# ─────────────────────────────────────────────────────────────
+
+# Rule 16: Card state transitions MUST go through the state machine
+# validation layer defined in specification.md §10.1.
+# NEVER update the card status field directly in the database.
+# Always call the transition function which validates:
+#   - from-state is the current state
+#   - to-state is permitted from from-state for this actor
+#   - guard conditions are satisfied
+# Reference: OBJ-06, REQ-06.01–06.04
+
+# Rule 17: TERMINATED is an irrecoverable terminal state.
+# NEVER generate code that transitions a card FROM TERMINATED
+# to any other state. Any such attempt returns HTTP 409.
+# Reference: OBJ-06
+
+# Rule 18: SUSPENDED state can only be set by an upstream compliance
+# platform signal. NEVER generate an API handler that allows a
+# caller to directly set a card to SUSPENDED via the freeze endpoint.
+# Reference: REQ-02.08, §9.2.1
+
+# Rule 19: Concurrent state changes on the same card MUST use
+# optimistic locking (version field compare-and-swap). If the version
+# does not match, return HTTP 409 STATE_TRANSITION_CONFLICT and write
+# AUD-11. Never use last-write-wins for card state.
+# Reference: TASK-02.03, REQ-02.07
+
+# ─────────────────────────────────────────────────────────────
+# SPENDING CONTROLS RULES
+# ─────────────────────────────────────────────────────────────
+
+# Rule 20: A spending limit with amount = 0 BLOCKS ALL transactions
+# of that type. Zero is not treated as "no limit" or "unlimited".
+# Reference: REQ-03.05, EDGE-10
+
+# Rule 21: Velocity windows use 24-hour UTC sliding windows —
+# NOT calendar-day resets. The window anchors to the authorisation
+# timestamp in UTC, not the local time of the merchant or cardholder.
+# Reference: REQ-03.03, FAIL-09
+
+# Rule 22: Spending limit evaluation MUST complete within 50ms (p99).
+# The evaluation order is: card state → MCC check → single-transaction
+# limit → daily velocity → weekly velocity. Short-circuit on first
+# failure. Do not evaluate all checks if one has already failed.
+# Reference: NFR-03, §10.4
+
+# ─────────────────────────────────────────────────────────────
+# TESTING RULES
+# ─────────────────────────────────────────────────────────────
+
+# Rule 23: Every test that creates card data MUST verify that no raw
+# PAN appears in the test's log output. Assert against regex:
+#   \b\d{13,19}\b
+# Zero matches is the only acceptable result.
+# Reference: SEC-03, TASK-06.01
+
+# Rule 24: Integration tests for freeze operations MUST include a
+# concurrent access test: two simultaneous freeze requests on the
+# same card must result in exactly one success and one HTTP 409.
+# Reference: TASK-02.03, EDGE-07
+
+# Rule 25: Tests for idempotency MUST verify that sending the same
+# mutating request twice results in exactly ONE database record,
+# not two. The second response must be identical to the first.
+# Reference: NFR-11, TASK-06.02
+
+# ─────────────────────────────────────────────────────────────
+# NAMING AND CONVENTION RULES
+# ─────────────────────────────────────────────────────────────
+
+# Rule 26: Use "programme" (British English) not "program" for card
+# programme references in documentation and comments.
+# Use "authorization" or "authorisation" consistently — prefer
+# "authorisation" to match the specification document.
+
+# Rule 27: Error codes are SCREAMING_SNAKE_CASE enums:
+#   CARD_FROZEN, LIMIT_EXCEEDED, MCC_BLOCKED, SCA_REQUIRED,
+#   VAULT_UNAVAILABLE, STATE_TRANSITION_CONFLICT, etc.
+# Never use numeric error codes or free-text error strings as the
+# primary error identifier.
+
+# Rule 28: All UUIDs use UUID v4 for externally visible IDs
+# (card_id, webhook_id, limit_id). Use UUID v7 (time-ordered) for
+# audit event IDs only, to support time-range queries and gap detection.
+# Reference: §7.2 (event_id: UUID v7)
