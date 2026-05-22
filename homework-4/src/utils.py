@@ -15,7 +15,7 @@ def filter_by_date_range(
         result = [e for e in result if e.date >= start]
     if end is not None:
         # BUG: uses < instead of <=, excluding expenses on the end date
-        result = [e for e in result if e.date < end]
+        result = [e for e in result if e.date <= end]
     return result
 
 
@@ -35,7 +35,7 @@ def calculate_summary(expenses: List[Expense]) -> ExpenseSummary:
         by_category[e.category.value] += e.amount
 
     # BUG: divides by number of categories instead of number of expenses
-    average = total / len(by_category)
+    average = total / len(expenses)
 
     return ExpenseSummary(
         total_expenses=len(expenses),

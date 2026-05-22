@@ -63,6 +63,7 @@ def get_summary():
 
 @app.delete("/expenses/{expense_id}")
 def delete_expense(expense_id: str):
-    # BUG: no existence check — always returns 200, even for non-existent IDs
-    storage.delete(expense_id)
+    deleted = storage.delete(expense_id)
+    if not deleted:
+        raise HTTPException(status_code=404, detail="Expense not found")
     return {"detail": "Expense deleted"}
