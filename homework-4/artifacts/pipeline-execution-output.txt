@@ -1,0 +1,91 @@
+$ ./run-pipeline.sh
+==============================================
+  HW4: 4-Agent Pipeline
+==============================================
+Using Claude binary: /Users/macbook/.codemoss/dependencies/claude-sdk/.../claude
+Processing 3 bug(s): context/bugs/001-date-filter-off-by-one/ context/bugs/002-incorrect-average/ context/bugs/003-missing-delete-validation/
+──────────────────────────────────────────────────
+
+=== Bug: 001-date-filter-off-by-one ===
+──────────────────────────────────────────────────
+[1/4] Research Verifier
+  Agent: research-verifier  Model: claude-opus-4-6
+  Verification complete. All 5 file:line references verified. Quality Level 5 — Excellent.
+  Agent research-verifier completed successfully.
+──────────────────────────────────────────────────
+[2/4] Bug Fixer
+  Agent: bug-fixer  Model: claude-sonnet-4-6
+  Change applied: src/utils.py:18 — e.date < end → e.date <= end
+  Test result: PASS — all 11 tests green.
+  Agent bug-fixer completed successfully.
+──────────────────────────────────────────────────
+[3/4] Security Verifier
+  Agent: security-verifier  Model: claude-opus-4-6
+  7 findings: 2 HIGH, 2 MEDIUM, 1 LOW, 2 INFO
+  Agent security-verifier completed successfully.
+──────────────────────────────────────────────────
+[4/4] Unit Test Generator
+  Agent: unit-test-generator  Model: claude-sonnet-4-6
+  4 tests generated, 4 passed. FIRST-compliant.
+  Agent unit-test-generator completed successfully.
+
+=== Bug 001-date-filter-off-by-one: ALL 4 AGENTS COMPLETE ===
+──────────────────────────────────────────────────
+
+=== Bug: 002-incorrect-average ===
+──────────────────────────────────────────────────
+[1/4] Research Verifier
+  Agent: research-verifier  Model: claude-opus-4-6
+  All 7 references verified. Quality Level 5 — Excellent.
+  Agent research-verifier completed successfully.
+──────────────────────────────────────────────────
+[2/4] Bug Fixer
+  Agent: bug-fixer  Model: claude-sonnet-4-6
+  Change applied: src/utils.py:38 — len(by_category) → len(expenses)
+  Test result: PASS — all 11 tests green.
+  Agent bug-fixer completed successfully.
+──────────────────────────────────────────────────
+[3/4] Security Verifier
+  Agent: security-verifier  Model: claude-opus-4-6
+  7 findings: 2 HIGH, 2 MEDIUM, 2 LOW, 1 INFO
+  Agent security-verifier completed successfully.
+──────────────────────────────────────────────────
+[4/4] Unit Test Generator
+  Agent: unit-test-generator  Model: claude-sonnet-4-6
+  4 tests generated, 4 passed. FIRST-compliant.
+  Agent unit-test-generator completed successfully.
+
+=== Bug 002-incorrect-average: ALL 4 AGENTS COMPLETE ===
+──────────────────────────────────────────────────
+
+=== Bug: 003-missing-delete-validation ===
+──────────────────────────────────────────────────
+[1/4] Research Verifier
+  Agent: research-verifier  Model: claude-opus-4-6
+  All 6 references verified. Quality Level 5 — Excellent.
+  Agent research-verifier completed successfully.
+──────────────────────────────────────────────────
+[2/4] Bug Fixer
+  Agent: bug-fixer  Model: claude-sonnet-4-6
+  Change applied: src/main.py:64-68 — added 404 guard on delete
+  Test result: PASS — 15 tests green.
+  Agent bug-fixer completed successfully.
+──────────────────────────────────────────────────
+[3/4] Security Verifier
+  Agent: security-verifier  Model: claude-opus-4-6
+  6 findings: 2 HIGH, 2 MEDIUM, 1 LOW, 1 INFO
+  Agent security-verifier completed successfully.
+──────────────────────────────────────────────────
+[4/4] Unit Test Generator
+  Agent: unit-test-generator  Model: claude-sonnet-4-6
+  3 tests generated, 3 passed. FIRST-compliant.
+  Agent unit-test-generator completed successfully.
+
+=== Bug 003-missing-delete-validation: ALL 4 AGENTS COMPLETE ===
+──────────────────────────────────────────────────
+
+==============================================
+  Pipeline Summary
+==============================================
+Bugs processed: 3
+Status: COMPLETE — all agents succeeded

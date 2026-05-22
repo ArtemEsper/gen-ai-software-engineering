@@ -1,0 +1,44 @@
+$ python -m pytest tests/ -v --cov=src --cov-report=term-missing
+============================= test session starts ==============================
+platform darwin -- Python 3.9.6, pytest-8.4.2, pluggy-1.6.0
+rootdir: /Users/macbook/Documents/GitHub/gen-ai-software-engineering/homework-4
+configfile: pyproject.toml
+plugins: anyio-4.12.1, cov-7.1.0
+collecting ... collected 22 items
+
+tests/test_basic.py::test_create_expense PASSED                          [  4%]
+tests/test_basic.py::test_create_expense_validation_error PASSED         [  9%]
+tests/test_basic.py::test_create_expense_invalid_category PASSED         [ 13%]
+tests/test_basic.py::test_list_expenses_empty PASSED                     [ 18%]
+tests/test_basic.py::test_list_expenses_returns_created PASSED           [ 22%]
+tests/test_basic.py::test_list_expenses_filter_by_category PASSED        [ 27%]
+tests/test_basic.py::test_get_expense_by_id PASSED                       [ 31%]
+tests/test_basic.py::test_get_expense_not_found PASSED                   [ 36%]
+tests/test_basic.py::test_summary_empty PASSED                           [ 40%]
+tests/test_basic.py::test_summary_single_category PASSED                 [ 45%]
+tests/test_basic.py::test_delete_existing_expense PASSED                 [ 50%]
+tests/test_bug_001.py::test_end_date_inclusive PASSED                    [ 54%]
+tests/test_bug_001.py::test_after_end_date_excluded PASSED               [ 59%]
+tests/test_bug_001.py::test_full_range_boundaries PASSED                 [ 63%]
+tests/test_bug_001.py::test_same_start_and_end_date PASSED               [ 68%]
+tests/test_bug_002.py::test_average_divides_by_expense_count_not_category_count PASSED [ 72%]
+tests/test_bug_002.py::test_average_all_same_category PASSED             [ 77%]
+tests/test_bug_002.py::test_average_single_expense PASSED                [ 81%]
+tests/test_bug_002.py::test_average_one_expense_per_category PASSED      [ 86%]
+tests/test_bug_003.py::test_delete_nonexistent_returns_404 PASSED        [ 90%]
+tests/test_bug_003.py::test_delete_existing_returns_200 PASSED           [ 95%]
+tests/test_bug_003.py::test_double_delete_returns_404 PASSED             [100%]
+
+================================ tests coverage ================================
+_______________ coverage: platform darwin, python 3.9.6-final-0 ________________
+
+Name              Stmts   Miss  Cover   Missing
+-----------------------------------------------
+src/__init__.py       0      0   100%
+src/main.py          43      2    95%   21-22
+src/models.py        29      0   100%
+src/storage.py       19      0   100%
+src/utils.py         20      0   100%
+-----------------------------------------------
+TOTAL               111      2    98%
+============================== 22 passed in 0.73s ==============================

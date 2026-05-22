@@ -1,0 +1,21 @@
+$ cat context/bugs/*/security-report.md | grep -E "^### SEC-"
+
+=== Security Findings Across All 3 Bug Reports ===
+
+Consistent findings detected by the Security Verifier agent across all
+scanned files. The bug fixes themselves introduced no new vulnerabilities.
+
+| ID | Title | Severity | File:Line | OWASP |
+|----|-------|----------|-----------|-------|
+| SEC-001 | Hardcoded API Secret "supersecret123" | HIGH | src/main.py:15 | A07:2021 |
+| SEC-002 | Auth function defined but never wired as dependency | HIGH | src/main.py:20-22 | A07:2021 |
+| SEC-003 | Log injection via unsanitized expense description | MEDIUM | src/main.py:29 | A09:2021 |
+| SEC-004 | Timing-unsafe secret comparison (!=) | MEDIUM | src/main.py:21 | A02:2021 |
+| SEC-005 | Unpinned dependency versions in requirements.txt | LOW | requirements.txt | A06:2021 |
+| SEC-006 | Stale "BUG:" comments in fixed code | INFO | src/utils.py:17,37 | — |
+
+Total: 2 HIGH, 2 MEDIUM, 1 LOW, 1 INFO
+
+All findings are pre-existing in the codebase. None were introduced by
+the bug fixes. SEC-001 and SEC-003 are the intentionally seeded security
+issues from the execution spec.
